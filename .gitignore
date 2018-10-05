@@ -1,4 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+\#current-cloud-backend
+src/aws-exports.js
+amplify/backend/awscloudformation/
+amplify/backend/amplify-meta.json
 
 # dependencies
 /node_modules
