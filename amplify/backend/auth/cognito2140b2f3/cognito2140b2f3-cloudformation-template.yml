@@ -1,6 +1,17 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
+  env:
+    Type: String
+  authRoleName:
+    Type: String
+  unauthRoleName:
+    Type: String
+  authRoleArn:
+    Type: String
+  unauthRoleArn:
+    Type: String
+
     
   identityPoolName:
     Type: String
@@ -110,24 +121,15 @@ Parameters:
   useDefault:
     Type: String
             
-  unAuthRoleName:
-    Type: String
-            
-  authRoleName:
-    Type: String
-            
-  unAuthRoleArn:
-    Type: String
-            
-  authRoleArn:
-    Type: String
-            
   resourceName:
     Type: String
             
   authSelections:
     Type: String
-          
+                                                  
+Conditions:
+  ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
+
 Resources:
   
   # BEGIN SNS ROLE RESOURCE
@@ -135,7 +137,7 @@ Resources:
   # Created to allow the UserPool SMS Config to publish via the Simple Notification Service during MFA Process
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Ref roleName
+      RoleName: !If [ShouldNotCreateEnvResources, !Ref roleName, !Join ['',[!Ref roleName, '-', !Ref env]]]
       AssumeRolePolicyDocument: 
         Version: "2012-10-17"
         Statement: 
@@ -165,7 +167,7 @@ Resources:
   # Depends on SNS Role for Arn if MFA is enabled
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: !Ref userPoolName
+      UserPoolName: !If [ShouldNotCreateEnvResources, !Ref userPoolName, !Join ['',[!Ref userPoolName, '-', !Ref env]]]
       Schema: 
         
         -
@@ -198,7 +200,7 @@ Resources:
   # Depends on UserPool for ID reference
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
-      ClientName: cognitoc57d9dc8_app_clientWeb
+      ClientName: cognito2140b2f3_app_clientWeb
       
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
@@ -219,7 +221,7 @@ Resources:
   # Created to execute Lambda which gets userpool app client config values
     Type: 'AWS::IAM::Role'
     Properties:
-      RoleName: !Ref userpoolClientLambdaRole     
+      RoleName: !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -244,7 +246,7 @@ Resources:
             - 'const identity = new aws.CognitoIdentityServiceProvider();'
             - 'exports.handler = (event, context, callback) => {'
             - ' if (event.RequestType == ''Delete'') { '
-            - '   response.send(event, context, response.SUCCESS)'
+            - '   response.send(event, context, response.SUCCESS, {})'
             - ' }'
             - ' if (event.RequestType == ''Update'' || event.RequestType == ''Create'') {'
             - '   const params = {'
@@ -275,7 +277,7 @@ Resources:
     Properties:
       PolicyName: !Ref userpoolClientLambdaPolicy
       Roles: 
-        - !Ref userpoolClientLambdaRole
+        - !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -292,7 +294,7 @@ Resources:
     Properties:
       PolicyName: !Ref userpoolClientLogPolicy
       Roles: 
-        - !Ref userpoolClientLambdaRole
+        - !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -325,7 +327,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: cognitoc57d9dc8_identitypool_c57d9dc8
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'cognito2140b2f3_identitypool_2140b2f3', !Join ['',['cognito2140b2f3_identitypool_2140b2f3', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient
@@ -350,7 +352,7 @@ Resources:
     Properties: 
       IdentityPoolId: !Ref IdentityPool
       Roles:
-          unauthenticated: !Ref unAuthRoleArn
+          unauthenticated: !Ref unauthRoleArn
           authenticated: !Ref authRoleArn
     DependsOn: IdentityPool
   
