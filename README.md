@@ -80,4 +80,4 @@ The AWS Amplify Console provides continuous deployment and hosting for modern we
 <!-- <img src="https://github.com/swaminator/gatsby-auth-starter-aws-amplify/blob/master/src/images/amplify-console.gif" width="800"/> -->
 ![Amplify Console](src/images/amplifyconsole-cra.gif)
 
-You can now continuously deploy changes to your frontend or backend and Amplify will automatically deploy those changes.
+You can now continuously deploy changes to your frontend or backend and Amplify will automatically deploy those changes. Learn how to customize the sign-in UI [here](https://aws-amplify.github.io/docs/js/authentication#customize-ui).
