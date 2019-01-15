@@ -1,12 +1,8 @@
 # Create-react-app with AWS Amplify Auth 
 
-This auth starter implements a basic authentication flow for signing up signing in users as well as protected client side routing using AWS Amplify. Auth features:
+This auth starter implements a basic authentication flow for signing up signing in users as well as protected client side routing using AWS Amplify. Auth features: User sign up, User sign in, Multi-factor Authentication, User sign-out.
 
-User sign up
-User sign in
-Multi-factor Authentication
-User sign-out
-
+![Amplify Auth](src/images/auth.gif)
 
 ## Getting started
 
