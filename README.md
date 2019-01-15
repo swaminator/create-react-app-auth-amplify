@@ -12,7 +12,7 @@ User sign-out
 
 1. Clone repo 
 ```
-git@github.com:swaminator/create-react-app-auth-amplify.git
+git clone git@github.com:swaminator/create-react-app-auth-amplify.git
 ```
 
 2. Change into the new directory
