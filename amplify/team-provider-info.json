@@ -1,0 +1,19 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "authcra-20190115123000-authRole",
+            "UnauthRoleArn": "arn:aws:iam::033205456844:role/authcra-20190115123000-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::033205456844:role/authcra-20190115123000-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "authcra-20190115123000-deployment",
+            "UnauthRoleName": "authcra-20190115123000-unauthRole",
+            "StackName": "authcra-20190115123000",
+            "StackId": "arn:aws:cloudformation:us-west-2:033205456844:stack/authcra-20190115123000/543035c0-1904-11e9-be0a-063a4d9c7b3c"
+        },
+        "categories": {
+            "auth": {
+                "cognitocf0c6096": {}
+            }
+        }
+    }
+}
