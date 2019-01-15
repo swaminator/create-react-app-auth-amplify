@@ -41,26 +41,29 @@ amplify configure
 amplify init
 ```
 
-> Here, walk through the following steps:
+> Here, walk through the following steps. At the end of the `init` command a project will be initialized in the cloud for you.
 
-- Enter a name for the project __YOURPROJECTNAME__
 - Enter a name for the environment __master__
-- Choose your default editor: __Visual Studio Code__ (or your editor of choice)
-- Choose the type of app that you're building __javascript__
-- What javascript framework are you using __react__
-- Source Directory Path: __src__
-- Distribution Directory Path: __public__
-- Build Command: __npm run-script build__
-- Start Command: __npm run-script develop__
+- Choose your default editor: __Sublime Text__ (or your editor of choice)
+- Do you want to use an AWS profile? __y__ (choose default)
+
+6. Run `amplify status`. The status should reflect as below. This indicates that an `Auth` resource is configured and ready to be created.
+
+```
+| Category | Resource name   | Operation | Provider plugin   |
+| -------- | --------------- | --------- | ----------------- |
+| Auth     | cognito2140b2f3 | Create    | awscloudformation |
+```
 
 6. Push the updated project configuration to AWS. It will deploy a CloudFormation template that has an Amazon Cognito resource that enables user authentication.
 
 ```sh
 amplify push
 ```
+
 7. Then you can run it by:
 ```sh
-npm run start
+npm start
 ```
 
 ## Hosting with the AWS Amplify Console
