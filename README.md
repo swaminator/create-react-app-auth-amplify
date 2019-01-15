@@ -6,9 +6,9 @@ This auth starter implements a basic authentication flow for signing up signing 
 
 ## Getting started
 
-1. Clone repo 
+1. Fork repo and then clone locally 
 ```
-git clone git@github.com:swaminator/create-react-app-auth-amplify.git
+git clone git@github.com:<username>/create-react-app-auth-amplify.git
 ```
 
 2. Change into the new directory
