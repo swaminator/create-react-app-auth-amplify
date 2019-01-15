@@ -19,7 +19,7 @@ git clone git@github.com:<username>/create-react-app-auth-amplify.git
 cd create-react-app-auth-amplify
 ```
 
-3. Change into the new directory
+3. Install dependencies
 
 ```sh
 yarn
