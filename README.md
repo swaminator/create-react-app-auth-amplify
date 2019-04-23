@@ -1,3 +1,4 @@
+## This repo is no longer being maintained. Please visit: https://github.com/aws-samples/create-react-app-auth-amplify
 # CRA with AWS Amplify Auth 
 
 This auth starter implements a basic authentication flow for signing up signing in users as well as protected client side routing using AWS Amplify. Auth features: User sign up, User sign in, Multi-factor Authentication, User sign-out.
